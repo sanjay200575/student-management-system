@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Student Management System</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        :root {
+            --primary-color: #4f46e5; /* Indigo */
+            --background-color: #f8f9fa;
+            --form-bg: #ffffff;
+            --text-color: #344767;
+            --text-light: #6c757d;
+            --border-color: #e9ecef;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+            --border-radius: 0.75rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 2rem 0;
+        }
+
+        .register-container {
+            max-width: 600px;
+            width: 100%;
+            background-color: var(--form-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 2rem 3rem;
+        }
+
+        .register-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .register-header .logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .register-header .logo i {
+            font-size: 2rem;
+            color: var(--primary-color);
+        }
+
+        .register-header h2 {
+            font-size: 1.75rem;
+            font-weight: 600;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .input-group {
+            margin-bottom: 1rem;
+        }
+        
+        .input-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .input-group label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .input-group input, .input-group select {
+            width: 100%;
+            padding: 0.85rem 1rem;
+            border-radius: var(--border-radius);
+            border: 1px solid var(--border-color);
+            font-size: 1rem;
+        }
+        
+        .file-upload label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.85rem 1rem;
+            border: 2px dashed var(--border-color);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+        }
+        .file-upload input[type="file"] {
+            display: none;
+        }
+
+        .terms {
+            grid-column: 1 / -1;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .register-btn {
+            grid-column: 1 / -1;
+            width: 100%;
+            padding: 0.85rem;
+            border: none;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+        }
+        .login-link a {
+            color: var(--primary-color);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        @media (max-width: 640px) {
+            .register-container {
+                padding: 2rem;
+            }
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="register-container">
+        <div class="register-header">
+            <div class="logo">
+                <i class='bx bxs-graduation'></i>
+                <h2>Student Management System</h2>
+            </div>
+        </div>
+        <form id="registerForm">
+            <div class="form-grid">
+                <div class="input-group full-width">
+                    <label for="fullname">Full Name</label>
+                    <input type="text" id="fullname" required>
+                </div>
+                <div class="input-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="input-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" required>
+                </div>
+                <div class="input-group">
+                    <label for="studentid">Student ID</label>
+                    <input type="text" id="studentid">
+                </div>
+                <div class="input-group">
+                    <label for="class">Class / Department</label>
+                    <input type="text" id="class">
+                </div>
+                <div class="input-group">
+                    <label for="gender">Gender</label>
+                    <select id="gender">
+                        <option>Male</option>
+                        <option>Female</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="role">Role</label>
+                    <select id="role">
+                        <option>Student</option>
+                        <option>Teacher</option>
+                        <option>Admin</option>
+                    </select>
+                </div>
+                <div class="input-group full-width file-upload">
+                    <label for="photo">
+                        <i class='bx bx-upload'></i>
+                        <span>Upload Profile Photo</span>
+                    </label>
+                    <input type="file" id="photo" accept="image/*">
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" required>
+                </div>
+                <div class="input-group">
+                    <label for="confirm-password">Confirm Password</label>
+                    <input type="password" id="confirm-password" required>
+                </div>
+                <div class="terms">
+                    <input type="checkbox" id="terms" required>
+                    <label for="terms">I agree to the <a href="#">Terms & Conditions</a></label>
+                </div>
+                <button type="submit" class="register-btn" id="submitBtn">Create Account</button>
+            </div>
+        </form>
+        <div class="login-link">
+            Already have an account? <a href="#">Login</a>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+
+            if (password !== confirmPassword) {
+                alert("Passwords do not match!");
+                return;
+            }
+
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.textContent = 'Registering...';
+            submitBtn.disabled = true;
+
+            // Create FormData object to handle text inputs and file upload automatically
+            const formData = new FormData();
+            formData.append('fullname', document.getElementById('fullname').value);
+            formData.append('email', document.getElementById('email').value);
+            formData.append('phone', document.getElementById('phone').value);
+            formData.append('studentid', document.getElementById('studentid').value);
+            formData.append('class', document.getElementById('class').value);
+            formData.append('gender', document.getElementById('gender').value);
+            formData.append('role', document.getElementById('role').value);
+            formData.append('password', password);
+            
+            const photoFile = document.getElementById('photo').files[0];
+            if (photoFile) {
+                formData.append('photo', photoFile);
+            }
+
+            try {
+                // Replace '/api/register' with your actual backend URL
+                const response = await fetch('/api/register', {
+                    method: 'POST',
+                    body: formData // No Content-Type header needed for FormData
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    alert('Registration successful! Please login.');
+                    window.location.href = 'login.html';
+                } else {
+                    alert(data.message || 'Registration failed.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Server connection failed.');
+            } finally {
+                submitBtn.textContent = 'Create Account';
+                submitBtn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>

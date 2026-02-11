@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Student Management System</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        :root {
+            --primary-color: #4f46e5; /* Indigo */
+            --background-color: #f8f9fa;
+            --form-bg: #ffffff;
+            --text-color: #344767;
+            --text-light: #6c757d;
+            --border-color: #e9ecef;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+            --border-radius: 0.75rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .login-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            max-width: 1000px;
+            width: 100%;
+            background-color: var(--form-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .illustration-panel {
+            background: linear-gradient(to bottom right, var(--primary-color), #818cf8);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .illustration-panel i {
+            font-size: 8rem;
+            margin-bottom: 1rem;
+        }
+
+        .illustration-panel h1 {
+            font-size: 2rem;
+            font-weight: 600;
+        }
+
+        .login-panel {
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .login-header h2 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .login-header p {
+            color: var(--text-light);
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 0.85rem 1rem 0.85rem 2.75rem;
+            border-radius: var(--border-radius);
+            border: 1px solid var(--border-color);
+            font-size: 1rem;
+        }
+
+        .input-group i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+            font-size: 1.25rem;
+        }
+
+        .login-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .forgot-password {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 0.85rem;
+            border: none;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-login {
+            text-align: center;
+        }
+        .social-login p {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+        .social-icons button {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid var(--border-color);
+            background: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--text-color);
+        }
+
+        .signup-link {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.9rem;
+        }
+        .signup-link a {
+            color: var(--primary-color);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        @media (max-width: 800px) {
+            .login-container {
+                grid-template-columns: 1fr;
+            }
+            .illustration-panel {
+                display: none;
+            }
+            .login-panel {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <div class="illustration-panel">
+            <i class='bx bxs-school'></i>
+            <h1>Student Management System</h1>
+            <p>Your complete solution for modern education.</p>
+        </div>
+        <div class="login-panel">
+            <div class="login-header">
+                <h2>Welcome Back!</h2>
+                <p>Sign in to continue to your dashboard.</p>
+            </div>
+            <form id="loginForm">
+                <div class="input-group">
+                    <i class='bx bx-envelope'></i>
+                    <input type="email" id="email" placeholder="Email / Username" required>
+                </div>
+                <div class="input-group">
+                    <i class='bx bx-lock-alt'></i>
+                    <input type="password" id="password" placeholder="Password" required>
+                </div>
+                <div class="login-options">
+                    <div class="remember-me">
+                        <input type="checkbox" id="remember">
+                        <label for="remember">Remember Me</label>
+                    </div>
+                    <a href="#" class="forgot-password">Forgot Password?</a>
+                </div>
+                <button type="submit" class="login-btn">Login</button>
+            </form>
+            <div class="social-login">
+                <p>Or login with</p>
+                <div class="social-icons">
+                    <button><i class='bx bxl-google'></i></button>
+                    <button><i class='bx bxl-microsoft'></i></button>
+                </div>
+            </div>
+            <div class="signup-link">
+                Don't have an account? <a href="#">Sign Up</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const submitBtn = document.querySelector('.login-btn');
+
+            try {
+                submitBtn.textContent = 'Logging in...';
+                submitBtn.disabled = true;
+
+                // Replace '/api/login' with your actual backend URL
+                const response = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    // Store token (if your backend returns one)
+                    localStorage.setItem('authToken', data.token);
+                    // Redirect to dashboard
+                    window.location.href = 'dashborad.html';
+                } else {
+                    alert(data.message || 'Login failed. Please check your credentials.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred connecting to the server.');
+            } finally {
+                submitBtn.textContent = 'Login';
+                submitBtn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Profile</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary-color: #4f46e5; /* Indigo */
+            --background-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-color: #344767;
+            --text-light: #6c757d;
+            --border-color: #e9ecef;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+            --border-radius: 0.75rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            padding: 2rem;
+        }
+
+        .profile-container {
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            padding: 2rem;
+            gap: 2rem;
+        }
+
+        .profile-photo img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid var(--primary-color);
+        }
+
+        .profile-info h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .profile-info p {
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        .profile-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            padding: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .detail-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .detail-item span:first-child {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .detail-item span:last-child {
+            color: var(--text-light);
+        }
+
+        .tabs-card {
+            padding: 0;
+        }
+
+        .tab-nav {
+            display: flex;
+            border-bottom: 1px solid var(--border-color);
+            padding: 0 2rem;
+        }
+
+        .tab-nav-item {
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            font-weight: 600;
+            color: var(--text-light);
+            transition: all 0.2s;
+        }
+
+        .tab-nav-item.active {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+        }
+
+        .tab-content {
+            display: none;
+            padding: 2rem;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Academic Performance Styles */
+        .subject-performance {
+            margin-bottom: 1.5rem;
+        }
+        .subject-performance label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background-color: var(--border-color);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .progress {
+            height: 100%;
+            background-color: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border-radius: 10px;
+        }
+        
+        .chart-container {
+            height: 300px;
+        }
+
+        @media (max-width: 768px) {
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="profile-container">
+        <!-- Student Info Card -->
+        <div class="card">
+            <div class="profile-header">
+                <div class="profile-photo">
+                    <img src="https://i.pravatar.cc/150?u=student101" alt="Student Photo">
+                </div>
+                <div class="profile-info">
+                    <h1>John Doe</h1>
+                    <p>Student ID: ST101 | Class: 10 - Section: A</p>
+                </div>
+            </div>
+            <div class="profile-details">
+                <div class="detail-item">
+                    <span>Date of Birth</span>
+                    <span>01-Jan-2008</span>
+                </div>
+                <div class="detail-item">
+                    <span>Contact Number</span>
+                    <span>+1 234 567 890</span>
+                </div>
+                <div class="detail-item">
+                    <span>Parent's Name</span>
+                    <span>Richard Doe</span>
+                </div>
+                <div class="detail-item">
+                    <span>Address</span>
+                    <span>123 Main Street, Anytown, USA</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabs Card -->
+        <div class="card tabs-card">
+            <nav class="tab-nav">
+                <div class="tab-nav-item active" data-tab="attendance">Attendance</div>
+                <div class="tab-nav-item" data-tab="performance">Academic Performance</div>
+                <div class="tab-nav-item" data-tab="fees">Fees</div>
+                <div class="tab-nav-item" data-tab="documents">Documents</div>
+            </nav>
+            <div class="tab-content active" id="attendance">
+                <h3>Monthly Attendance Report</h3>
+                <div class="chart-container">
+                    <canvas id="attendanceChart"></canvas>
+                </div>
+            </div>
+            <div class="tab-content" id="performance">
+                <h3>Subject-wise Marks</h3>
+                <div class="subject-performance">
+                    <label>Mathematics - 85%</label>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 85%;">85%</div>
+                    </div>
+                </div>
+                <div class="subject-performance">
+                    <label>Science - 92%</label>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 92%;">92%</div>
+                    </div>
+                </div>
+                <div class="subject-performance">
+                    <label>English - 78%</label>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 78%;">78%</div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-content" id="fees">
+                <h3>Fee Payment History</h3>
+                <p>Details about paid and pending fees will be displayed here.</p>
+            </div>
+            <div class="tab-content" id="documents">
+                <h3>Uploaded Documents</h3>
+                <p>Links to birth certificate, previous mark sheets, etc.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab functionality
+        const tabs = document.querySelectorAll('.tab-nav-item');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const targetId = tab.getAttribute('data-tab');
+                
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                tabContents.forEach(content => {
+                    if (content.id === targetId) {
+                        content.classList.add('active');
+                    } else {
+                        content.classList.remove('active');
+                    }
+                });
+            });
+        });
+
+        // Chart.js setup for Attendance
+        const ctx = document.getElementById('attendanceChart').getContext('2d');
+        const attendanceChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                datasets: [{
+                    label: '% Attendance',
+                    data: [98, 95, 96, 92, 97, 99],
+                    backgroundColor: 'rgba(79, 70, 229, 0.8)',
+                    borderColor: 'rgba(79, 70, 229, 1)',
+                    borderWidth: 1,
+                    borderRadius: 5
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>
